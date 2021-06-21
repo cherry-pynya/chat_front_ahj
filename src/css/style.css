@@ -67,6 +67,10 @@
 .chat-messages {
     height: 80%;
     width: 100%;
+    padding: 5px;
+    display: flex;
+    flex-direction: column;
+    overflow-y: scroll;
 }
 
 .chat-form {
@@ -82,4 +86,26 @@
     height: 96%;
     width: 99%;
     border-radius: 10px;
+}
+
+.messaege-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    width: 95%;
+}
+
+.messager {
+    color: #a19797;
+    font-size: 12px;
+}
+
+.messager .message {
+    width: 100%;
+}
+
+.user {
+    align-items: flex-end;
+    justify-content: flex-end;
 }
