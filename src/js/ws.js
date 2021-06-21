@@ -10,11 +10,11 @@ export default class Socket {
   }
 
   onOpen() {
-    this.ws.send('hello');
+    console.log('conected')
   }
 
   onMessage(evt) {
-    console.log(evt);
+    console.log(evt)
   }
 
   onClose(evt) {
