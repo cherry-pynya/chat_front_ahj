@@ -1,3 +1,4 @@
-# [Ссылка](https://cherry-pynya.github.io/helpDesk_app_front/)
-[![Build status](https://ci.appveyor.com/api/projects/status/iqjogn6ae1cxcytu?svg=true)](https://ci.appveyor.com/project/cherry-pynya/helpdesk-app-front)
+# [Ссылка](https://cherry-pynya.github.io/chat_front_ahj/)
+[![Build status](https://ci.appveyor.com/api/projects/status/yo6yhxty1snouigc?svg=true)](https://ci.appveyor.com/project/cherry-pynya/chat-front-ahj)
+
 
