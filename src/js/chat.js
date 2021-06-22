@@ -27,6 +27,7 @@ export default class Chat {
 
   nameSubmit(e) {
     e.preventDefault();
+    if (this.nameForm.querySelector('.name-form-input').value === '') return;
     this.toggleForm();
     this.user = {
       type: 'userName',
@@ -45,6 +46,7 @@ export default class Chat {
 
   sentMessage(e) {
     e.preventDefault();
+    if (this.chatForm.querySelector('.chat-form-input').value === '') return;
     this.socket.ws.send(JSON.stringify({
       type: 'message',
       text: this.chatForm.querySelector('.chat-form-input').value,

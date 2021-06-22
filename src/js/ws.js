@@ -13,10 +13,9 @@ export default class Socket {
     this.ws.addEventListener('close', (e) => {
       this.onClose(e, this.app);
     });
-    this.ws.addEventListener('error', this.onError);
   }
 
-  onOpen(data) {
+  onOpen() {
     console.log('user conected');
   }
 
@@ -41,9 +40,5 @@ export default class Socket {
 
   onClose(evt, app) {
     app.loginTaken(evt.reason);
-  }
-
-  onError() {
-    console.log('error');
   }
 }
