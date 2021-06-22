@@ -3,6 +3,7 @@ import moment from 'moment';
 import { v4 as uuidv4 } from 'uuid';
 import Socket from './ws';
 import { messageFactory, userMessageFactoty } from './messageFactory';
+import { thisUserFactory, userFactory } from './userFactory';
 
 export default class Chat {
   constructor(el, server) {
@@ -13,14 +14,15 @@ export default class Chat {
     }
     this.nameForm = this.element.querySelector('.name-form');
     this.chatForm = this.element.querySelector('.chat-form');
-
+    this.server = server;
     this.nameSubmit = this.nameSubmit.bind(this);
     this.sentMessage = this.sentMessage.bind(this);
 
     this.nameForm.addEventListener('submit', this.nameSubmit);
     this.chatForm.addEventListener('submit', this.sentMessage);
 
-    this.socket = new Socket(server, this);
+    this.server = server;
+    this.socket = new Socket(this.server, this);
   }
 
   nameSubmit(e) {
@@ -62,5 +64,24 @@ export default class Chat {
       msg = messageFactory(obj);
     }
     document.querySelector('.chat-messages').insertAdjacentHTML('beforeend', msg);
+  }
+
+  showUser(obj) {
+    let avatar;
+    if (this.user.userId === obj.userId) {
+      avatar = thisUserFactory();
+    } else {
+      avatar = userFactory(obj);
+    }
+    document.querySelector('.chat-members-container').insertAdjacentHTML('beforeend', avatar);
+  }
+
+  loginTaken(str) {
+    if (!this.nameForm.querySelector('.login-notice')) {
+      this.nameForm.insertAdjacentHTML('afterbegin', `<p class='login-notice'>${str}</p>`);
+    }
+    this.chatForm.querySelector('.chat-form-input').value = '';
+    this.socket = new Socket(this.server, this);
+    this.toggleForm();
   }
 }

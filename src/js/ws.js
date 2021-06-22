@@ -1,3 +1,4 @@
+/* eslint-disable no-restricted-globals */
 /* eslint-disable class-methods-use-this */
 export default class Socket {
   constructor(server, app) {
@@ -9,22 +10,28 @@ export default class Socket {
     this.ws.addEventListener('message', (e) => {
       this.onMessage(e, this.app);
     });
-    this.ws.addEventListener('close', this.onClose);
+    this.ws.addEventListener('close', (e) => {
+      this.onClose(e, this.app);
+    });
     this.ws.addEventListener('error', this.onError);
   }
 
-  onOpen() {
-    console.log('conected');
+  onOpen(data) {
+    console.log('user conected');
   }
 
   onMessage(evt, app) {
     if (evt.data) {
       const data = JSON.parse(evt.data);
-      console.log(data);
       if (data.type === 'message') {
         app.showMesage(data);
       }
       if (data.type === 'general') {
+        document.querySelector('.chat-members-container').textContent = '';
+        document.querySelector('.chat-messages').textContent = '';
+        data.users.forEach((el) => {
+          app.showUser(el);
+        });
         data.messages.forEach((el) => {
           app.showMesage(el);
         });
@@ -32,8 +39,8 @@ export default class Socket {
     }
   }
 
-  onClose(evt) {
-    console.log(evt);
+  onClose(evt, app) {
+    app.loginTaken(evt.reason);
   }
 
   onError() {
